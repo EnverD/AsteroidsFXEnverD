@@ -18,17 +18,16 @@ public class CollisionDetector implements IPostEntityProcessingService {
 
                 // if the two entities are identical, skip the iteration
                 if (entity1.getID().equals(entity2.getID())) {
-                    continue;                    
+                    continue;
                 }
 
                 // CollisionDetection
                 if (this.collides(entity1, entity2)) {
-                    world.removeEntity(entity1);
-                    world.removeEntity(entity2);
+                    entity1.setCollided(true);
+                    entity2.setCollided(true);
                 }
             }
         }
-
     }
 
     public Boolean collides(Entity entity1, Entity entity2) {
