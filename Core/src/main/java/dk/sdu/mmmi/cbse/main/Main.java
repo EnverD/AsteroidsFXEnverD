@@ -28,6 +28,33 @@ public class Main extends Application {
     private final Map<Entity, Polygon> polygons = new ConcurrentHashMap<>();
     private final Pane gameWindow = new Pane();
 
+    private final IEntityProcessingService entityProcessingService;
+    private final IGamePluginService gamePluginService;
+
+    public Main(IEntityProcessingService entityProcessingService, IGamePluginService gamePluginService) {
+        this.entityProcessingService = entityProcessingService;
+        this.gamePluginService = gamePluginService;
+    }
+    public Main() {
+        this.entityProcessingService = new IEntityProcessingService() {
+            @Override
+            public void process(GameData gameData, World world) {
+
+            }
+        };
+        this.gamePluginService = new IGamePluginService() {
+            @Override
+            public void start(GameData gameData, World world) {
+
+            }
+
+            @Override
+            public void stop(GameData gameData, World world) {
+
+            }
+        };
+    }
+
     public static void main(String[] args) {
         launch(Main.class);
     }
