@@ -8,33 +8,46 @@ import dk.sdu.mmmi.cbse.common.data.World;
 public class CollisionDetector implements IPostEntityProcessingService {
 
     public CollisionDetector() {
+        // Tom konstruktør - nødvendig for IPostEntityProcessingService-implementering
     }
 
     @Override
     public void process(GameData gameData, World world) {
-        // two for loops for all entities in the world
+        // Løkke igennem alle entiteter i verdenen for at tjekke kollisioner
         for (Entity entity1 : world.getEntities()) {
-            for (Entity entity2 : world.getEntities()) {
+            checkCollisionsForEntity(entity1, world);
+        }
+    }
 
-                // if the two entities are identical, skip the iteration
-                if (entity1.getID().equals(entity2.getID())) {
-                    continue;
-                }
+    private void checkCollisionsForEntity(Entity entity1, World world) {
+        for (Entity entity2 : world.getEntities()) {
+            if (shouldSkipCollisionCheck(entity1, entity2)) {
+                continue;
+            }
 
-                // CollisionDetection
-                if (this.collides(entity1, entity2)) {
-                    entity1.setCollided(true);
-                    entity2.setCollided(true);
-                }
+            if (detectCollision(entity1, entity2)) {
+                handleCollision(entity1, entity2);
             }
         }
     }
 
-    public Boolean collides(Entity entity1, Entity entity2) {
+    private boolean shouldSkipCollisionCheck(Entity entity1, Entity entity2) {
+        // Skip hvis entiteterne er identiske
+        return entity1.getID().equals(entity2.getID());
+    }
+
+    boolean detectCollision(Entity entity1, Entity entity2) {
+        // Metode til at detektere kollision mellem to entiteter
         float dx = (float) entity1.getX() - (float) entity2.getX();
         float dy = (float) entity1.getY() - (float) entity2.getY();
         float distance = (float) Math.sqrt(dx * dx + dy * dy);
         return distance < (entity1.getRadius() + entity2.getRadius());
     }
 
+    private void handleCollision(Entity entity1, Entity entity2) {
+        // Metode til at håndtere kollision mellem to entiteter
+        entity1.setCollided(true);
+        entity2.setCollided(true);
+    }
 }
+

@@ -58,4 +58,8 @@ public class Entity implements Serializable {
     public void setCollided(boolean collided) {
         this.collided = collided;
     }
+
+    public boolean isDestroyed() {
+        return false;
+    }
 }

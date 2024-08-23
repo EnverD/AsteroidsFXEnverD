@@ -19,27 +19,25 @@ public class SpringConfig {
 
     @Bean
     public IEntityProcessingService entityProcessingService() {
-        // Replace with your actual implementation
         return new IEntityProcessingService() {
             @Override
             public void process(GameData gameData, World world) {
-
+                // Implementation goes here
             }
         };
     }
 
     @Bean
     public IGamePluginService gamePluginService() {
-        // Replace with your actual implementation
         return new IGamePluginService() {
             @Override
             public void start(GameData gameData, World world) {
-
+                // Implementation goes here
             }
 
             @Override
             public void stop(GameData gameData, World world) {
-
+                // Implementation goes here
             }
         };
     }
