@@ -19,6 +19,9 @@
         <module>CommonAsteroids</module>
         <module>Asteroids</module>
         <module>Collision</module>
+        <module>Enemy</module>
+        <module>Scoring</module>
+
     </modules>
     <properties>
         <java>java</java>
